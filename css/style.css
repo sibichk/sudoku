@@ -6,11 +6,49 @@
   text-align: center;
 }
 .container .board {
-  width: 100%;
-  height: 100%;
-  border: solid;
-  color: black;
   display: none;
+}
+.container .board #div2 {
+  position: relative;
+  top: -4px;
+  left: -4px;
+  height: 101.3%;
+  width: 101.3%;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+}
+.container #div1 {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: #f1f1f1;
+  border: 6px solid black;
+}
+table {
+  display: none;
+  border: solid;
+  height: 100%;
+  width: 100%;
+  border-collapse: collapse;
+}
+table td {
+  width: 11.11%;
+  border: 1px solid;
+  height: 11.11%;
+  font-size: 20px;
+  text-align: center;
+  font-: bold;
+}
+table tr:nth-child(3),
+table tr:nth-child(6) {
+  border-bottom: 2px solid #ffa500;
+}
+table tr td:nth-child(3),
+table tr td:nth-child(6) {
+  border-right: 2px solid #ffa500;
+}
+.filled {
+  background-color: white !important;
 }
 .home {
   font-family: 'Dancing Script', cursive;
@@ -21,18 +59,19 @@
   cursor: pointer;
   margin-top: 50%;
 }
-.instructions,
-.facts {
+footer {
+  border-top-width: 5px;
+  border-color: #ff0000;
+  font-family: 'Roboto', sans-serif;
+}
+footer .instructions,
+footer .facts {
   display: inline-block;
   width: 49%;
   text-align: left;
   margin-top: 20px;
 }
-footer {
-  border-top-width: 5px;
-  border-color: #ff0000;
-}
-.facts {
+footer .facts {
   border-left: solid;
   border-color: orange;
   border-width: 2px;
