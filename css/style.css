@@ -50,6 +50,12 @@ table tr td:nth-child(6) {
 .filled {
   background-color: white !important;
 }
+.db {
+  background-color: orange;
+  border: none;
+  width: 100%;
+  display: none;
+}
 .home {
   font-family: 'Dancing Script', cursive;
   color: #ffa500;
