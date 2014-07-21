@@ -5,7 +5,7 @@
 @btn-width:80px;
 @btn-height:40px;
 @font-size:24px;
-@ftr-font: 'Roboto', sans-serif;
+@ftr-font: 'Indie Flower', cursive;
 
 .container{
 	width:600px;
@@ -13,7 +13,7 @@
 	margin-left: auto;
     margin-right: auto;
 	text-align: center;
-	.board{
+	/*.board{
 		display:none;
 		#div2{
 	    position: relative;
@@ -31,7 +31,7 @@
 	width: 100%;
 	background-color: @color;
 	border: 6px solid black;
-	}
+	} */
 }
 table{
 	display:none;
@@ -46,6 +46,10 @@ table{
 	font-size: 20px;
 	text-align: center;
 	font-:bold;
+	
+	}
+	.filled{
+		background-color: white !important;
 	}
 	tr:nth-child(3), tr:nth-child(6){
 	border-bottom: 2px solid @btn-color;
@@ -54,9 +58,7 @@ table{
 	border-right: 2px solid @btn-color;
 	}
 }
-	.filled{
-		background-color: white !important;
-	}
+	
 
 	.db{
 		background-color: orange;
@@ -74,8 +76,24 @@ table{
 	cursor:pointer;
 	margin-top:50%;
 }
+.rst{
+	margin-top: -30px;
+	height: 20px;
+	margin-left: -11px;
+	width: 20px;
+	position: absolute; 
+	background: url('../close.png');
+	background-size: 20px 20px;
+	display:none;
+}
 
+#hour, #mins, #sec{
+	display:inline-block;
+	border:solid;
+}
 footer{
+	
+	font-size: 18px;
 	border-top-width:5px;
 	border-color: #ff0000;
 	font-family:@ftr-font;
@@ -92,4 +110,6 @@ footer{
 		padding-left:10px;
 		}
 }
-
+td:not(.filled){
+		background-color: #F1F1F1
+	}

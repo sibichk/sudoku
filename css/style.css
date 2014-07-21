@@ -4,25 +4,26 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-}
-.container .board {
-  display: none;
-}
-.container .board #div2 {
-  position: relative;
-  top: -4px;
-  left: -4px;
-  height: 101.3%;
-  width: 101.3%;
-  background-color: #f1f1f1;
-  border-radius: 15px;
-}
-.container #div1 {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  background-color: #f1f1f1;
-  border: 6px solid black;
+  /*.board{
+		display:none;
+		#div2{
+	    position: relative;
+		top: -4px;
+		left: -4px;
+		height: 101.3%;
+		width: 101.3%;
+		background-color: @color;
+		border-radius: 15px;
+		}
+	}
+	#div1{
+    position: relative;
+	height: 100%;
+	width: 100%;
+	background-color: @color;
+	border: 6px solid black;
+	} */
+
 }
 table {
   display: none;
@@ -39,6 +40,9 @@ table td {
   text-align: center;
   font-: bold;
 }
+table .filled {
+  background-color: white !important;
+}
 table tr:nth-child(3),
 table tr:nth-child(6) {
   border-bottom: 2px solid #ffa500;
@@ -46,9 +50,6 @@ table tr:nth-child(6) {
 table tr td:nth-child(3),
 table tr td:nth-child(6) {
   border-right: 2px solid #ffa500;
-}
-.filled {
-  background-color: white !important;
 }
 .db {
   background-color: orange;
@@ -65,10 +66,27 @@ table tr td:nth-child(6) {
   cursor: pointer;
   margin-top: 50%;
 }
+.rst {
+  margin-top: -30px;
+  height: 20px;
+  margin-left: -11px;
+  width: 20px;
+  position: absolute;
+  background: url('../close.png');
+  background-size: 20px 20px;
+  display: none;
+}
+#hour,
+#mins,
+#sec {
+  display: inline-block;
+  border: solid;
+}
 footer {
+  font-size: 18px;
   border-top-width: 5px;
   border-color: #ff0000;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Indie Flower', cursive;
 }
 footer .instructions,
 footer .facts {
@@ -82,4 +100,7 @@ footer .facts {
   border-color: orange;
   border-width: 2px;
   padding-left: 10px;
+}
+td:not(.filled) {
+  background-color: #f1f1f1;
 }
