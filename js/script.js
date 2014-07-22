@@ -2,24 +2,17 @@ $(document).ready(function(){
 	var filled= '.filled'
 	$('.home').click(function(){                 //event for 'start' button
 		$(this).css("display","none");
-		$('table, .renew, #timer, #start, #stop, #clear').css("display","table");
+		$('table, #timer, #start, #stop, #clear').css("display","table");
 		timer();
 	});
-	$('#timer').hover(function(){
-		$('.overlay').css("display","block");
-		
-	},function(){
-		$('.overlay').css("display","none");
-	})
-
-	$('td').not(filled).hover(function(){        //'hover over' for user-filled cells event
+	$('td').not(filled).hover(function(){        //'hover' event for user-filled cells 
 	  $(this).css("background-color","pink");
 	  },function(){
 	  $(this).css("background-color","#F1F1F1");
 	}); 
 	$('td').not(filled).on('click',function(e){     
 		$('td select, td .rst').remove();
-		current = $(this);                       //get the instance of the cell clicked and assign it to a variable 'current'
+		current = $(this);                       //get the instance of the cell object clicked and assign it to a variable 'current'
 		current.empty();
 		unique(current);
 		})
@@ -32,7 +25,7 @@ $(document).ready(function(){
 			arr.push($(this).text().trim());
 		})
 		var vertical_index = current.index()+1;
-		$('table tr td:nth-child('+vertical_index+')').each(function(){      // getting elements present in the column 
+		$('table tr td:nth-child('+vertical_index+')').each(function(){      // getting elements present in the same column 
 			var column_ele = $(this).text().trim();
 			var match = jQuery.inArray(column_ele, arr);                              //combine the two arrays as one array and remove blank spaces
 			if(match == -1){
@@ -42,7 +35,7 @@ $(document).ready(function(){
 		}) 
 		unique_index= "" + horizontal_index + vertical_index;
 		/*-------------first three rows --------------*/
-		if (horizontal_index <=3){
+		if (horizontal_index <=3){                                        //condition to get the nine numbers in the region in which the clicked cell is present
 			if(vertical_index <=3){
 				for(i=1;i<4;i++){
 					for(j=1;j<4;j++){
@@ -157,43 +150,50 @@ $(document).ready(function(){
 		arr = jQuery.grep(arr, function(n, i){                           //remove null elements in the final array
 		  return (n !== "");
 		});
-		console.log(arr)
 		dropdown(current,arr,unique_index);
 	}
 
 	/*------------function to pop dropdown and display selected value --------*/
 	function dropdown(current, arr, unique_index){
+		var full= 0;
 		var digits = [" ","1","2","3","4","5","6","7","8","9"];
-		var rem = $(digits).not(arr).get();
+		var rem = $(digits).not(arr).get();                                            
 		current.append("<div class='rst'></div>");
-		current.append("<select class='dd' id=index"+unique_index+"></select>");
+		current.append("<select class='dd' id=index"+unique_index+"></select>");               
 		$('.dd, .rst').fadeIn('slow');
-		$('.rst').on('click',function(event){
+		$('.rst').on('click',function(event){                                                 //clears current cell
 			$(this).closest('td').empty();
 			event.stopPropagation();
 		})
-		for(i=0;i<rem.length;i++){
+		for(i=0;i<rem.length;i++){                                                           // dropdown has numbers not present in the row, column or region
 			$('<option/>').val(rem[i]).html(rem[i]).appendTo('select#index'+unique_index);
 		}
 		$('select').on('click',function(event){
 			event.stopPropagation();
 		})
-		$('select').on('change', function() {
+		$('select').on('change', function() {                                         //everytime a value is changed a new array is generated reflecting the change
 			$('select#index'+unique_index).replaceWith($(this).val());
     		$('.rst, select').remove();
-		});
+    		if($('table').find('td:empty').length) {
+			}
+		else{
+			alert('eureka! you did it!!');                               //if the entire table is full alert box with a message appears
+			stop.onclick();
+			}
+    	});
+    	
 	}	
 
 
 /*-----------------stop watch -----------------*/
-var h1 = document.getElementById('timer'),
+var watch = document.getElementById('timer'),
     start = document.getElementById('start'),
     stop = document.getElementById('stop'),
     clear = document.getElementById('clear'),
     seconds = 0, minutes = 0, hours = 0,
     t;
 
-function add() {
+function add() {                          //function to add up seconds, minutes, hours
     seconds++;
     if (seconds >= 60) {
         seconds = 0;
@@ -204,7 +204,7 @@ function add() {
         }
     }
     
-    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    watch.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
 
     timer();
 }
@@ -212,8 +212,8 @@ function timer() {
     t = setTimeout(add, 1000);
 }
 
-/* Start button */
-start.onclick = function(){
+/* Start button */ 
+start.onclick = function(){                        
 	$('#start').attr("disabled", true);
 	$('#stop').attr("disabled", false);
 	$('.overlay').css("display","none")
@@ -231,7 +231,7 @@ stop.onclick = function() {
 /* Clear button */
 clear.onclick = function() {
 	$('td').not(filled).empty();
-    h1.textContent = "00:00:00";
+    watch.textContent = "00:00:00";
     seconds = 0; minutes = 0; hours = 0;
 }
 
