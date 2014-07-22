@@ -22,37 +22,6 @@
 	cursor:pointer;
 	margin-top:50%;
 	}
-	table{
-	display:none;
-	border:solid;
-	height:100%;
-	width:100%;
-	border-collapse: collapse;
-		td{
-		width:11.11%;
-		border:1px solid;
-		height:11.11%;
-		font-size: 20px;
-		text-align: center;
-		font-:bold;
-		
-		}
-		.filled{
-			background-color: white !important;
-		}
-		tr:nth-child(3), tr:nth-child(6){
-		border-bottom: 2px solid @btn-color;
-		}
-	    tr td:nth-child(3), tr td:nth-child(6){
-		border-right: 2px solid @btn-color;
-		}
-		.dd{
-		background-color: orange;
-		border:none;
-		width:100%;
-		display:none;
-		}
-	}
 	.rst{
 	margin-top: -30px;
 	height: 20px;
@@ -63,18 +32,41 @@
 	background-size: 20px 20px;
 	display:none;
 	}
-	.overlay {
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.85);
-	z-index: 10;
-	color:white;
+}
+table{
 	display:none;
-	font-family:@ftr-font;
-	font-size:26px;
-	margin-top: -600px;
+	border:solid;
+	height:100%;
+	width:100%;
+	border-collapse: collapse;
+	td{
+	width:11.11%;
+	border:1px solid;
+	height:11.11%;
+	font-size: 20px;
+	text-align: center;
+	font-:bold;
+	
 	}
-	#start, #stop, #clear{
+	.filled{
+		background-color: white !important;
+	}
+	tr:nth-child(3), tr:nth-child(6){
+	border-bottom: 2px solid @btn-color;
+	}
+    tr td:nth-child(3), tr td:nth-child(6){
+	border-right: 2px solid @btn-color;
+	}
+}
+	
+.dd{
+		background-color: orange;
+		border:none;
+		width:100%;
+		display:none;
+	}
+
+#start, #stop, #clear{
 	display:none;
 	width:80px;
 	height:40px;
@@ -85,30 +77,39 @@
 	position:absolute;
 }
 
-	#start{
-		margin-left:640px;
-	}
-
-	#stop{
-		margin-left:730px;
-	}
-	#clear{
-		margin-left:820px;
-	}
-	#timer{
-		display:none;
-		margin-left:700px;
-		margin-top:-500px;
-		width: 80px;
-		height: 21px;
-		border-radius: 20px;
-		background-color: #F1F1F1;
-		text-align: center;
-		padding: 15px;
-	}
+#start{
+	margin-left:640px;
 }
 
-	
+#stop{
+	margin-left:730px;
+}
+#clear{
+	margin-left:820px;
+}
+#timer{
+	display:none;
+	margin-left:700px;
+	margin-top:-500px;
+	width: 80px;
+	height: 21px;
+	border-radius: 20px;
+	background-color: #F1F1F1;
+	text-align: center;
+	padding: 15px;
+}
+
+.overlay {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.85);
+	z-index: 10;
+	color:white;
+	display:none;
+	font-family:@ftr-font;
+	font-size:26px;
+	margin-top: -600px;
+}
 footer{
 	font-size: 18px;
 	color:black;
