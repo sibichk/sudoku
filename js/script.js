@@ -1,284 +1,173 @@
 $(document).ready(function(){
-
-	$('.home').click(function(){           //event for 'start' button
+	var filled= '.filled'
+	$('.home').click(function(){                 //event for 'start' button
 		$(this).css("display","none");
-		$('table').css("display","table");
+		$('table, .renew, #timer, #start, #stop, #clear').css("display","table");
 		timer();
 	});
+	$('#timer').hover(function(){
+		$('.overlay').css("display","block");
+		
+	},function(){
+		$('.overlay').css("display","none");
+	})
 
-	$('.renew').click(function(){
-		$('td').not('.filled').empty();
-		$('#hour, #mins, #sec').empty();
-		timer();
-	});
-
-	$("td").not(".filled").hover(function(){
+	$('td').not(filled).hover(function(){        //'hover over' for user-filled cells event
 	  $(this).css("background-color","pink");
 	  },function(){
 	  $(this).css("background-color","#F1F1F1");
 	}); 
-	//var butt  = $('td').not('.filled');
-	//$('table td').not('.filled').on('click', function(){
-	$('td').not('.filled').on('click',function(e){
+	$('td').not(filled).on('click',function(e){     
 		$('td select, td .rst').remove();
-		current = $(this); 
-		//get the instance of the cell clicked and assign it to a variable
+		current = $(this);                       //get the instance of the cell clicked and assign it to a variable 'current'
 		current.empty();
 		unique(current);
-		
 		})
-
-
 
 	function unique(current){                                            //function to check the values in the same row, column and region as the one clicked
 		var arr=[];                                                      // so that a number is not repeated and is unique
 		var horizontal_index = current.closest('tr').index()+1;
 		$('table tr:nth-child('+horizontal_index+') td').each(function(){          // getting all elements present in the row corresponding to the cell clicked
 			                                                                      //and pushing them to an array
-			arr.push($(this).text());
+			arr.push($(this).text().trim());
 		})
 		var vertical_index = current.index()+1;
 		$('table tr td:nth-child('+vertical_index+')').each(function(){      // getting elements present in the column 
-			var column_ele = $(this).text();
+			var column_ele = $(this).text().trim();
 			var match = jQuery.inArray(column_ele, arr);                              //combine the two arrays as one array and remove blank spaces
 			if(match == -1){
-				arr.push($(this).text());
+				arr.push($(this).text().trim());
 			} 
 			
 		}) 
 		unique_index= "" + horizontal_index + vertical_index;
-		
 		/*-------------first three rows --------------*/
 		if (horizontal_index <=3){
 			if(vertical_index <=3){
 				for(i=1;i<4;i++){
 					for(j=1;j<4;j++){
 						var block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
-						var match = jQuery.inArray(block_ele, arr);  
+						match = jQuery.inArray(block_ele, arr);  
 					                          //combine the two arrays as one array and remove blank spaces
 						if(match == -1){
-							arr.push(block_ele);
+							arr.push(block_ele.trim());
 						}
 					}
-					
-					
-					/*var block_ele = $('table tr:nth-child('+ i +') td:nth-child(2)').text().trim();
-			 		var match = jQuery.inArray(block_ele, arr);
-			 		if(match == -1){
-						arr.push(block_ele);
-					}	
-					var block_ele = $('table tr:nth-child('+ i +') td:nth-child(3)').text().trim();
-					var match = jQuery.inArray(block_ele, arr);
-					if(match == -1){
-						arr.push(block_ele);
-					} */
 				}
 			}
 			else if(vertical_index >3 && vertical_index <=6){
-					for(i=1;i<4;i++){
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(4)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(5)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(6)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-						                          //combine the two arrays as one array and remove blank spaces
+				for(i=1;i<4;i++){
+					for(j=4;j<7;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+						match = jQuery.inArray(block_ele, arr);  
+				                          //combine the two arrays as one array and remove blank spaces
 						if(match == -1){
 							arr.push(block_ele.trim());
 						}
 					}
+				}
 			}
 			else{
 				for(i=1;i<4;i++){
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(7)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
+					for(j=7;j<10;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+				 		match = jQuery.inArray(block_ele, arr);  
+					    if(match == -1){
 							arr.push(block_ele.trim());
 						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(8)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(9)').text().trim();
-					var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-
+					}
 				}
 			}
 		}
 		/*------------------------middle rows--------------------*/
 		else if(horizontal_index >3 && horizontal_index <=6){
-				if(vertical_index <=3){
+			if(vertical_index <=3){
 				for(i=4;i<7;i++){
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(1)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
+					for(j=1;j<4;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+				 		match = jQuery.inArray(block_ele, arr);  
+					    if(match == -1){
 							arr.push(block_ele.trim());
 						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(2)').text().trim(); 
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(3)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
+					}
 				}
 			}
 			else if(vertical_index >3 && vertical_index <=6){
-					for(i=4;i<7;i++){
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(4)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
+				for(i=4;i<7;i++){
+					for(j=4;j<7;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+					 	match = jQuery.inArray(block_ele, arr);  
+					    if(match == -1){
 							arr.push(block_ele.trim());
 						}
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(5)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(6)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-
 					}
+				}
 			}
 			else{
 				for(i=4;i<7;i++){
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(7)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
+					for(j=7;j<10;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+				 		match = jQuery.inArray(block_ele, arr);  
+					    if(match == -1){
 							arr.push(block_ele.trim());
 						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(8)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(9)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-
+					}
 				}
 			}
 		}
 		/*-------------------------last three rows------------------*/
 		else {
-				if(vertical_index <=3){
+			if(vertical_index <=3){
 				for(i=7;i<10;i++){
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(1)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
+					for(j=1;j<4;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+				 		match = jQuery.inArray(block_ele, arr);  
 					                          //combine the two arrays as one array and remove blank spaces
 						if(match == -1){
 							arr.push(block_ele.trim());
 						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(2)').text().trim(); 
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(3)').text().trim();
-					var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-
 					}
+				}
 			}	
 			else if(vertical_index >3 && vertical_index <=6){
-					for(i=7;i<10;i++){
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(4)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
+				for(i=7;i<10;i++){
+					for(j=4;j<7;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+					 	match = jQuery.inArray(block_ele, arr);  
 					                          //combine the two arrays as one array and remove blank spaces
 						if(match == -1){
 							arr.push(block_ele.trim());
 						}
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(5)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-					 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(6)').text().trim();
-					 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-
 					}
+				}
 			}
 			else{
 				for(i=7;i<10;i++){
-				 	var block_ele = $('table tr:nth-child('+ i +') td:nth-child(7)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
+					for(j=7;j<10;j++){
+						block_ele = $('table tr:nth-child('+ i +') td:nth-child('+ j +')').text().trim();
+				 		match = jQuery.inArray(block_ele, arr);  
 					                          //combine the two arrays as one array and remove blank spaces
 						if(match == -1){
 							arr.push(block_ele.trim());
 						}
-				 	$('table tr:nth-child('+ i +') td:nth-child(8)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-				 	$('table tr:nth-child('+ i +') td:nth-child(9)').text().trim();
-				 	var match = jQuery.inArray(block_ele, arr);  
-					                          //combine the two arrays as one array and remove blank spaces
-						if(match == -1){
-							arr.push(block_ele.trim());
-						}
-
+					}
 				}
 			}
 		}
-		//console.log($('table tr td:nth-child('+vertical_index+')').text());
 		arr = jQuery.grep(arr, function(n, i){                           //remove null elements in the final array
 		  return (n !== "");
 		});
+		console.log(arr)
 		dropdown(current,arr,unique_index);
 	}
 
 	/*------------function to pop dropdown and display selected value --------*/
-	function dropdown(current, arr,unique_index){
+	function dropdown(current, arr, unique_index){
 		var digits = [" ","1","2","3","4","5","6","7","8","9"];
 		var rem = $(digits).not(arr).get();
-		
-		//current.empty();
 		current.append("<div class='rst'></div>");
-		current.append("<select class='db' id=index"+unique_index+"></select>");
-		$('.db, .rst').fadeIn('slow');
+		current.append("<select class='dd' id=index"+unique_index+"></select>");
+		$('.dd, .rst').fadeIn('slow');
 		$('.rst').on('click',function(event){
 			$(this).closest('td').empty();
 			event.stopPropagation();
@@ -290,82 +179,62 @@ $(document).ready(function(){
 			event.stopPropagation();
 		})
 		$('select').on('change', function() {
-
-			//	if($("select").val().length != 0){
-			
-    		$('select#index'+unique_index).replaceWith($(this).val());
+			$('select#index'+unique_index).replaceWith($(this).val());
     		$('.rst, select').remove();
-    		//current.bind("click")
-    		/*current.on('click',function(){
-    			current.empty();
-    			unique(current);
-    		}); */
 		});
-
-
 	}	
 
 
+/*-----------------stop watch -----------------*/
+var h1 = document.getElementById('timer'),
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
 
-	function timer(){
-		var CCOUNT = 60;
-    
-    var t, count;
-    
-    function cddisplay() {
-        // displays time in span
-        document.getElementById('sec').innerHTML = count;
-    };
-    
-    function countdown() {
-        // starts countdown
-        cddisplay();
-        if (count == 0) {
-            // time is up
-        } else {
-            count--;
-            t = setTimeout("countdown()", 1000);
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
         }
-    };
+    }
     
-    function cdpause() {
-        // pauses countdown
-        clearTimeout(t);
-    };
-    
-    function cdreset() {
-        // resets countdown
-        cdpause();
-        count = CCOUNT;
-        cddisplay();
-    };
-	}
-	/*-----function for timer--------
-	minutes = 0;
-	hours=0;
-	function timer(){
-		var start = new Date().getTime(),
-	    elapsed = '0.0';
+    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
 
-		window.setInterval(function()
-		{
-		    var time = new Date().getTime() - start;
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
 
-		    elapsed = Math.floor(time / 100) / 10;
-		    if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
-		    if(elapsed == '60.0'){
-				minutes += 1;
-				timer();
-		    }
-		    if(minutes == 60){
-		    	minutes = 0;
-		    	hours +=1;
-		    }
+/* Start button */
+start.onclick = function(){
+	$('#start').attr("disabled", true);
+	$('#stop').attr("disabled", false);
+	$('.overlay').css("display","none")
+	timer();
+}
 
-		     $('#sec').html(elapsed);
-		     $('#mins').html(minutes);
-		     $('#hour').html(hours);
+/* Stop button */
+stop.onclick = function() {
+	$('#start').attr("disabled", false);
+	$('#stop').attr("disabled", true);
+	$('.overlay').css("display","block")
+    clearTimeout(t);
+}
 
-		}, 100);
-	} */
+/* Clear button */
+clear.onclick = function() {
+	$('td').not(filled).empty();
+    h1.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+}
+
 });
+
+

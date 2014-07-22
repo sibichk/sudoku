@@ -2,8 +2,8 @@
 @color:#F1F1F1;
 @btn-color:orange;
 @btn-font:'Dancing Script', cursive;
-@btn-width:80px;
-@btn-height:40px;
+@btn-width:100px;
+@btn-height:50px;
 @font-size:24px;
 @ftr-font: 'Indie Flower', cursive;
 
@@ -13,25 +13,25 @@
 	margin-left: auto;
     margin-right: auto;
 	text-align: center;
-	/*.board{
-		display:none;
-		#div2{
-	    position: relative;
-		top: -4px;
-		left: -4px;
-		height: 101.3%;
-		width: 101.3%;
-		background-color: @color;
-		border-radius: 15px;
-		}
+	.home{
+	font-family:@btn-font;
+	color:@btn-color;
+	width:@btn-width;
+	height:@btn-height;
+	font-size: @font-size;
+	cursor:pointer;
+	margin-top:50%;
 	}
-	#div1{
-    position: relative;
-	height: 100%;
-	width: 100%;
-	background-color: @color;
-	border: 6px solid black;
-	} */
+	.rst{
+	margin-top: -30px;
+	height: 20px;
+	margin-left: -11px;
+	width: 20px;
+	position: absolute; 
+	background: url('../close.png');
+	background-size: 20px 20px;
+	display:none;
+	}
 }
 table{
 	display:none;
@@ -59,41 +59,60 @@ table{
 	}
 }
 	
-
-	.db{
+.dd{
 		background-color: orange;
 		border:none;
 		width:100%;
 		display:none;
 	}
 
-.home{
-	font-family:@btn-font;
-	color:@btn-color;
-	width:@btn-width;
-	height:@btn-height;
-	font-size: @font-size;
-	cursor:pointer;
-	margin-top:50%;
-}
-.rst{
-	margin-top: -30px;
-	height: 20px;
-	margin-left: -11px;
-	width: 20px;
-	position: absolute; 
-	background: url('../close.png');
-	background-size: 20px 20px;
+#start, #stop, #clear{
 	display:none;
+	width:80px;
+	height:40px;
+	color:@btn-color;
+	font-size:16px;
+	margin-left:20px;
+	margin-top:20px;
+	position:absolute;
 }
 
-#hour, #mins, #sec{
-	display:inline-block;
-	border:solid;
+#start{
+	margin-left:640px;
+}
+
+#stop{
+	margin-left:730px;
+}
+#clear{
+	margin-left:820px;
+}
+#timer{
+	display:none;
+	margin-left:700px;
+	margin-top:-500px;
+	width: 80px;
+	height: 21px;
+	border-radius: 20px;
+	background-color: #F1F1F1;
+	text-align: center;
+	padding: 15px;
+}
+
+.overlay {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.85);
+	z-index: 10;
+	color:white;
+	display:none;
+	font-family:@ftr-font;
+	font-size:26px;
+	margin-top: -600px;
 }
 footer{
-	
 	font-size: 18px;
+	color:black;
 	border-top-width:5px;
 	border-color: #ff0000;
 	font-family:@ftr-font;
